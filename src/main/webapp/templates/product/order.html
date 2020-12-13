@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8" />
+  <meta name="author" content="Codecool" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+  <title>Codecool Shop</title>
+
+  <!-- Bootstrap components -->
+  <!-- Latest compiled and minified Jquery -->
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+          integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
+  <!--Latest compiled and minified Popper -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+          integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+          integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+  <!-- Latest compiled and minified CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  <!-- End of Bootstrap components -->
+
+  <link rel="stylesheet" type="text/css" href="/static/css/custom.css" />
+
+  <script src="/static/js/main.js" defer></script>
+</head>
+
+<body>
+
+<div class="jumbotron text-center">
+  <h1><a href="/">Codecool Shop</a></h1>
+  <h2>Order Information</h2>
+</div>
+
+<div class="user-info">
+  <p th:text="${'Hello ' + customer.firstName}"></p>
+  <p>Here is your order information</p>
+  <p th:text="${customer.firstName + ', ' +  customer.lastName}"></p>
+  <p th:text="${customer.country + ', ' + customer.city + ', ' + customer.zipCode + ', ' + customer.address}"></p>
+  <p th:text="${customer.email}"></p>
+  <p th:text="${customer.phone}"></p>
+</div>
+
+
+<div class="container">
+  <h4>Here are your ordered products</h4>
+  <div id="products" class="row">
+    <div class="col col-sm-12 col-md-6 col-lg-6" th:each="prod,iterStat : ${cart}">
+      <div class="card">
+        <img class="" src="http://placehold.it/400x250/000/fff" th:attr="src='/static/img/' + ${prod.getPictureName()}" alt="" />
+        <div class="card-header">
+          <a href="https://docs.google.com/presentation/d/1c7NSpcoThhhXaKKDo49Y4wBLxHZrO7mKcoLeg2zjYCo/present?token=AC4w5Vg7r-UM5jvhKp9o0dg1FMpjjX9Dyw%3A1599739475368&includes_info_params=1&eisi=CN3ApvnF3usCFZ2MTwkd2bMPsg#slide=id.g534309f3b3_2_151"><h4 class="card-title" th:text="${prod.name}">Product name</h4></a>
+          <p class="card-text" th:text="${prod.description}">Product description... </p>
+        </div>
+        <div class="card-body">
+          <div class="card-text">
+            <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
+          </div>
+          <div class="card-text">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div th:replace="footer.html :: copy"></div>
+
+</body>
+</html>
